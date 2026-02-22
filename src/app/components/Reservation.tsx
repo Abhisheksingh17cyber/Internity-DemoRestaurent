@@ -1,46 +1,77 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, CheckCircle, X } from "lucide-react";
+import {
+  TIME_SLOTS,
+  OCCASIONS,
+  CONTACT,
+  RESERVATION_CONFIG,
+} from "../data";
+import type { ReservationFormData, ReservationResponse } from "../data";
 
 // ─── RESERVATION SECTION ─────────────────────────────────────────────────────
 // Minimal editorial booking section.
-// TODO: Replace handleSubmit with your backend API endpoint.
+// Data sourced from centralized data layer; submits to POST /api/reservations.
 
-const TIME_SLOTS = [
-  "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
-  "12:00 PM", "12:30 PM", "1:00 PM",  "1:30 PM",
-  "6:30 PM",  "7:00 PM",  "7:30 PM",  "8:00 PM",  "8:30 PM", "9:00 PM",
-];
-
-const INITIAL = {
+const INITIAL: ReservationFormData = {
   firstName: "", lastName: "", email: "", phone: "",
   date: "", time: "", guests: "", occasion: "", notes: "",
 };
 
+const GUEST_OPTIONS = Array.from(
+  { length: RESERVATION_CONFIG.maxGuestsOnline },
+  (_, i) => String(i + 1),
+);
+
 interface ReservationProps {
   asModal?: boolean;
   onClose?: () => void;
+  onReservationCreated?: (reservationId: string, formData: ReservationFormData) => void;
 }
 
-export function Reservation({ asModal, onClose }: ReservationProps) {
-  const [form, setForm]       = useState(INITIAL);
+export function Reservation({ asModal, onClose, onReservationCreated }: ReservationProps) {
+  const [form, setForm]       = useState<ReservationFormData>(INITIAL);
   const [submitted, setSubm]  = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState<string | null>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  // TODO: Replace with real API call: await fetch('/api/reservations', { method: 'POST', body: JSON.stringify(form) })
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400)); // simulated delay
-    console.log("Reservation:", form);
-    setLoading(false);
-    setSubm(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data: ReservationResponse = await res.json();
+
+      if (!res.ok || !data.success) {
+        setError(data.error || "Something went wrong. Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      setLoading(false);
+
+      if (RESERVATION_CONFIG.requireDeposit && onReservationCreated && data.reservationId) {
+        onReservationCreated(data.reservationId, form);
+      } else {
+        setSubm(true);
+      }
+    } catch {
+      setError("Unable to reach the server. Please try again later.");
+      setLoading(false);
+    }
   };
 
-  const reset = () => { setForm(INITIAL); setSubm(false); };
+  const reset = () => { setForm(INITIAL); setSubm(false); setError(null); };
   const today = new Date().toISOString().split("T")[0];
 
   // ── Shared input class ──
@@ -100,8 +131,8 @@ export function Reservation({ asModal, onClose }: ReservationProps) {
           className="text-[#7A6A55] text-sm leading-relaxed mb-12"
         >
           For parties of seven or more, please call us at{" "}
-          <a href="tel:+15552345678" className="text-[#1E1918] border-b border-[#1E1918]/30">
-            +1 (555) 234-5678
+          <a href={CONTACT.phoneHref} className="text-[#1E1918] border-b border-[#1E1918]/30">
+            {CONTACT.phone}
           </a>
           .
         </motion.p>
@@ -139,6 +170,17 @@ export function Reservation({ asModal, onClose }: ReservationProps) {
             onSubmit={onSubmit}
             className="space-y-6"
           >
+            {/* Error display */}
+            {error && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-red-600 text-sm"
+              >
+                {error}
+              </motion.p>
+            )}
+
             {/* Name row */}
             <div className="grid grid-cols-2 gap-6">
               <div>
@@ -185,7 +227,7 @@ export function Reservation({ asModal, onClose }: ReservationProps) {
                 <div className="relative">
                   <select name="guests" value={form.guests} onChange={onChange} required className={`${input} appearance-none pr-6`}>
                     <option value="" disabled>—</option>
-                    {["1","2","3","4","5","6"].map((n) => <option key={n}>{n} {n==="1"?"guest":"guests"}</option>)}
+                    {GUEST_OPTIONS.map((n) => <option key={n}>{n} {n==="1"?"guest":"guests"}</option>)}
                   </select>
                   <ChevronDown size={12} className="absolute right-0 top-3 text-[#7A6A55] pointer-events-none" />
                 </div>
@@ -198,7 +240,7 @@ export function Reservation({ asModal, onClose }: ReservationProps) {
               <div className="relative">
                 <select name="occasion" value={form.occasion} onChange={onChange} className={`${input} appearance-none pr-6`}>
                   <option value="">none</option>
-                  {["Birthday","Anniversary","Business dinner","Proposal","Date night","Other"].map((o) => (
+                  {OCCASIONS.map((o) => (
                     <option key={o}>{o}</option>
                   ))}
                 </select>
@@ -234,10 +276,20 @@ export function Reservation({ asModal, onClose }: ReservationProps) {
       </div>
     </div>
   );
+
+  return content;
 }
 
 // ── Modal wrapper ──
-export function ReservationModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function ReservationModal({
+  open,
+  onClose,
+  onReservationCreated,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onReservationCreated?: (reservationId: string, formData: ReservationFormData) => void;
+}) {
   return (
     <AnimatePresence>
       {open && (
@@ -257,7 +309,7 @@ export function ReservationModal({ open, onClose }: { open: boolean; onClose: ()
             className="fixed right-0 top-0 bottom-0 z-50 bg-[#F2EDE7] w-full max-w-xl
                        overflow-y-auto shadow-2xl"
           >
-            <Reservation asModal onClose={onClose} />
+            <Reservation asModal onClose={onClose} onReservationCreated={onReservationCreated} />
           </motion.div>
         </>
       )}

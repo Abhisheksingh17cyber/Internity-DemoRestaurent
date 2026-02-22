@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { RESTAURANT_NAME, NAV_LINKS, CONTACT } from "../data";
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 // Minimal fixed navbar — logo left, actions right. Inspired by florporto.com.
@@ -39,7 +40,7 @@ export function Navbar({ onReserveClick }: NavbarProps) {
           className="font-['Cormorant_Garamond'] italic text-[1.4rem] tracking-wide text-[#1E1918]
                      select-none leading-none"
         >
-          internity
+          {RESTAURANT_NAME}
         </motion.button>
 
         {/* Right actions */}
@@ -86,13 +87,7 @@ export function Navbar({ onReserveClick }: NavbarProps) {
                        items-start justify-center px-12 md:px-20"
           >
             <nav className="flex flex-col gap-6">
-              {[
-                { label: "home",        id: "hero"        },
-                { label: "brunch",      id: "brunch"      },
-                { label: "lunch",       id: "lunch"       },
-                { label: "dinner",      id: "dinner"      },
-                { label: "reservations",id: "reservation" },
-              ].map((item, i) => (
+              {NAV_LINKS.map((item, i) => (
                 <motion.button
                   key={item.id}
                   initial={{ opacity: 0, x: -24 }}
@@ -111,7 +106,7 @@ export function Navbar({ onReserveClick }: NavbarProps) {
             {/* Bottom contact in overlay */}
             <div className="absolute bottom-10 left-12 md:left-20">
               <p className="text-[#7A6A55] text-xs tracking-[0.2em] uppercase">
-                +1 (555) 234-5678 &nbsp;·&nbsp; hello@internity.com
+                {CONTACT.phone} &nbsp;·&nbsp; {CONTACT.email}
               </p>
             </div>
           </motion.div>

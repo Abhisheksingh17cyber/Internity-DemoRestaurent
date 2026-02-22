@@ -1,15 +1,10 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { IMAGES, RESTAURANT_NAME, RESTAURANT_NAME_FORMAL, HERO_TAGLINE } from "../data";
 
 // ─── HERO SECTION ─────────────────────────────────────────────────────────────
 // Blurred full-screen background + centered floating rounded card with restaurant
 // name overlaid. Inspired by florporto.com's hero treatment.
-
-const HERO_BG =
-  "https://images.unsplash.com/photo-1666196389175-630e3b80ad91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwY29mZmVlJTIwbGF0dGUlMjB3YXJtJTIwYm9rZWglMjBzb2Z0fGVufDF8fHx8MTc3MTc0OTk3NXww&ixlib=rb-4.1.0&q=80&w=1080";
-
-const HERO_CARD =
-  "https://images.unsplash.com/photo-1768051297578-1ea70392c307?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcmVzdGF1cmFudCUyMGludGVyaW9yJTIwYW1iaWFuY2V8ZW58MXx8fHwxNzcxNzQ5MTQ2fDA&ixlib=rb-4.1.0&q=80&w=1080";
 
 // Live clock shown in top center bar (like florporto "LOCAL TIME AT FLÔR")
 function useClock() {
@@ -42,7 +37,7 @@ export function Hero() {
       {/* ── Blurred full-screen background ── */}
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src={HERO_BG}
+          src={IMAGES.hero.background}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover scale-[1.15]"
@@ -60,7 +55,7 @@ export function Hero() {
         className="relative z-10 text-center pt-6"
       >
         <p className="text-[#7A6A55] text-[10px] tracking-[0.3em] uppercase">
-          local time at internity: {time}
+          local time at {RESTAURANT_NAME}: {time}
         </p>
       </motion.div>
 
@@ -75,8 +70,8 @@ export function Hero() {
         >
           {/* Card image */}
           <img
-            src={HERO_CARD}
-            alt="Internity Restaurant"
+            src={IMAGES.hero.card}
+            alt={RESTAURANT_NAME_FORMAL}
             className="w-full h-full object-cover"
           />
           {/* Subtle dark overlay on card */}
@@ -99,7 +94,7 @@ export function Hero() {
                 textShadow: "0 2px 24px rgba(0,0,0,0.25)",
               }}
             >
-              internity
+              {RESTAURANT_NAME}
             </h1>
           </motion.div>
         </motion.div>
@@ -111,7 +106,7 @@ export function Hero() {
           transition={{ delay: 1.0, duration: 0.8 }}
           className="mt-8 text-[#7A6A55] text-sm tracking-[0.25em] select-none"
         >
-          brunch &nbsp;·&nbsp; lunch &nbsp;·&nbsp; dinner
+          {HERO_TAGLINE}
         </motion.p>
       </div>
 

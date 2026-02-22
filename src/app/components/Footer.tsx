@@ -1,15 +1,21 @@
 import { motion } from "motion/react";
 import { Instagram, Facebook } from "lucide-react";
+import {
+  HOURS,
+  CONTACT,
+  SOCIAL_LINKS,
+  RESTAURANT_NAME,
+  RESTAURANT_NAME_FORMAL,
+  FOOTER_TAGLINE,
+} from "../data";
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
-// Minimal editorial footer. Update contact details as needed.
+// Minimal editorial footer. Data sourced from centralized data layer.
 
-const HOURS = [
-  { days: "Tuesday – Thursday",  time: "10:00 – 22:30" },
-  { days: "Friday – Saturday",   time: "10:00 – 23:30" },
-  { days: "Sunday",              time: "10:00 – 21:00" },
-  { days: "Monday",              time: "Closed"         },
-];
+const ICON_MAP: Record<string, typeof Instagram> = {
+  instagram: Instagram,
+  facebook: Facebook,
+};
 
 export function Footer() {
   return (
@@ -33,30 +39,30 @@ export function Footer() {
                 fontWeight: 300,
               }}
             >
-              internity
+              {RESTAURANT_NAME}
             </p>
             <p className="text-[#7A6A55] text-xs leading-relaxed mb-6 max-w-xs">
-              Where every meal becomes a timeless memory.
-              Fine dining at the intersection of tradition and innovation.
+              {FOOTER_TAGLINE}
             </p>
             {/* Social */}
             <div className="flex gap-3">
-              {[
-                { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-                { Icon: Facebook,  href: "https://facebook.com",  label: "Facebook"  },
-              ].map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-8 h-8 border border-white/10 hover:border-white/40 flex items-center
-                             justify-center text-[#7A6A55] hover:text-white transition-all duration-300"
-                >
-                  <Icon size={13} />
-                </a>
-              ))}
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = ICON_MAP[link.platform];
+                if (!Icon) return null;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="w-8 h-8 border border-white/10 hover:border-white/40 flex items-center
+                               justify-center text-[#7A6A55] hover:text-white transition-all duration-300"
+                  >
+                    <Icon size={13} />
+                  </a>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -90,16 +96,16 @@ export function Footer() {
             <p className="text-white/30 text-[10px] tracking-[0.3em] uppercase mb-5">Contact</p>
             <div className="space-y-3 text-xs">
               <p className="text-[#7A6A55] leading-relaxed">
-                12 Rue de l'Excellence<br />
-                Porto, Portugal
+                {CONTACT.address.line1}<br />
+                {CONTACT.address.city}, {CONTACT.address.country}
               </p>
-              <a href="tel:+15552345678"
+              <a href={CONTACT.phoneHref}
                  className="block text-[#C5BEB5] hover:text-white transition-colors">
-                +1 (555) 234-5678
+                {CONTACT.phone}
               </a>
-              <a href="mailto:hello@internity.com"
+              <a href={CONTACT.emailHref}
                  className="block text-[#C5BEB5] hover:text-white transition-colors">
-                hello@internity.com
+                {CONTACT.email}
               </a>
             </div>
           </motion.div>
@@ -110,7 +116,7 @@ export function Footer() {
         <div className="mt-16 pt-6 border-t border-white/8 flex flex-col sm:flex-row
                         items-start sm:items-center justify-between gap-3">
           <p className="text-[#3A3028] text-xs tracking-widest">
-            © {new Date().getFullYear()} Internity Restaurant
+            &copy; {new Date().getFullYear()} {RESTAURANT_NAME_FORMAL}
           </p>
           <div className="flex gap-5">
             <a href="#" className="text-[#3A3028] hover:text-[#7A6A55] text-xs tracking-widest uppercase transition-colors">

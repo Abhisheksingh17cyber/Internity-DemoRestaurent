@@ -1,15 +1,10 @@
 import { motion, AnimatePresence } from "motion/react";
+import { INDICATOR_SECTIONS } from "../data";
 
 // ─── RIGHT-SIDE TIME INDICATOR ────────────────────────────────────────────────
 // Fixed vertical timeline on the right edge of the viewport.
 // Shows the time-of-day progression as the user scrolls through dining sections.
 // Inspired by florporto.com's ambient navigation.
-
-const SECTIONS = [
-  { id: "brunch",  label: "morning"   },
-  { id: "lunch",   label: "afternoon" },
-  { id: "dinner",  label: "evening"   },
-];
 
 interface RightIndicatorProps {
   activeSection: string;
@@ -17,7 +12,7 @@ interface RightIndicatorProps {
 }
 
 export function RightIndicator({ activeSection, textColor = "#7A6A55" }: RightIndicatorProps) {
-  const isVisible = SECTIONS.some((s) => s.id === activeSection);
+  const isVisible = INDICATOR_SECTIONS.some((s) => s.id === activeSection);
 
   return (
     <AnimatePresence>
@@ -41,7 +36,7 @@ export function RightIndicator({ activeSection, textColor = "#7A6A55" }: RightIn
             {/* Top line */}
             <div className="w-px h-6 bg-current opacity-20" />
 
-            {SECTIONS.map((section, idx) => {
+            {INDICATOR_SECTIONS.map((section, idx) => {
               const isActive = activeSection === section.id;
               return (
                 <div key={section.id} className="flex flex-col items-end">
@@ -74,7 +69,7 @@ export function RightIndicator({ activeSection, textColor = "#7A6A55" }: RightIn
                   </div>
 
                   {/* Connector line between sections */}
-                  {idx < SECTIONS.length - 1 && (
+                  {idx < INDICATOR_SECTIONS.length - 1 && (
                     <div className="w-px h-14 bg-current opacity-20 self-end" />
                   )}
                 </div>

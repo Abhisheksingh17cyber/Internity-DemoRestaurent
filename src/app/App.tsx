@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
 import { Navbar } from "./components/Navbar";
@@ -7,35 +7,18 @@ import { DiningSection } from "./components/DiningSection";
 import { RightIndicator } from "./components/RightIndicator";
 import { ReservationModal } from "./components/Reservation";
 import { MenuModal } from "./components/MenuModal";
-import type { MenuType } from "./components/MenuModal";
+import { PaymentModal } from "./components/Payment";
 import { Footer } from "./components/Footer";
 
-// ─── SECTION BACKGROUNDS ──────────────────────────────────────────────────────
-// Each section has its own warm background tone (morning → afternoon → evening).
-const SECTION_BG: Record<string, string> = {
-  hero: "#F2EDE7",
-  brunch: "#F2EDE7", // warm cream
-  lunch: "#EBE5DA", // golden beige
-  dinner: "#EDD9CA", // soft rose
-  reservation: "#F2EDE7",
-};
-
-// ─── SECTION INDICATOR TEXT COLOUR ──────────────────────────────────────────
-const INDICATOR_TEXT: Record<string, string> = {
-  brunch: "#8B7055",
-  lunch: "#7A6040",
-  dinner: "#8B5A45",
-};
-
-// ─── DINING SECTION DATA ──────────────────────────────────────────────────────
-const IMG_BRUNCH =
-  "https://images.unsplash.com/photo-1623593476410-eb984e68bfe1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicnVuY2glMjBlZ2dzJTIwYmVuZWRpY3QlMjBhdm9jYWRvJTIwdG9hc3QlMjBtb3JuaW5nJTIwY2FmZXxlbnwxfHx8fDE3NzE3NDk5NzR8MA&ixlib=rb-4.1.0&q=80&w=1080";
-
-const IMG_LUNCH =
-  "https://images.unsplash.com/photo-1767969217506-b28edac04107?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnRlcm5vb24lMjBsdW5jaCUyMHdpbmUlMjBib3R0bGUlMjBnbGFzcyUyMG91dGRvb3J8ZW58MXx8fHwxNzcxNzQ5OTcwfDA&ixlib=rb-4.1.0&q=80&w=1080";
-
-const IMG_DINNER =
-  "https://images.unsplash.com/photo-1767706508378-8835e2a0ec97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxldmVuaW5nJTIwZmluZSUyMGRpbmluZyUyMGNhbmRsZSUyMHRhYmxlJTIwaW50aW1hdGV8ZW58MXx8fHwxNzcxNzQ5OTcwfDA&ixlib=rb-4.1.0&q=80&w=1080";
+import {
+  SECTION_BACKGROUNDS,
+  INDICATOR_TEXT_COLORS,
+  DEFAULT_BG,
+  DEFAULT_INDICATOR_COLOR,
+  DINING_SECTIONS,
+  RESERVATION_SECTION_COPY,
+} from "./data";
+import type { MenuType, ReservationFormData } from "./data";
 
 // ─── APP ──────────────────────────────────────────────────────────────────────
 export default function App() {
@@ -43,7 +26,24 @@ export default function App() {
   const [reserveOpen, setReserveOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState<MenuType>(null);
 
-  const bgColor = SECTION_BG[activeSection] ?? "#F2EDE7";
+  const [paymentOpen, setPaymentOpen] = useState(false);
+  const [reservationId, setReservationId] = useState<string | null>(null);
+  const [reservationData, setReservationData] = useState<ReservationFormData | null>(null);
+
+  const handleReservationCreated = (id: string, data: ReservationFormData) => {
+    setReservationId(id);
+    setReservationData(data);
+    setReserveOpen(false);
+    setPaymentOpen(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setPaymentOpen(false);
+    setReservationId(null);
+    setReservationData(null);
+  };
+
+  const bgColor = SECTION_BACKGROUNDS[activeSection] ?? DEFAULT_BG;
 
   // ── Smooth background transition via IntersectionObserver ──
   useEffect(() => {
@@ -95,70 +95,22 @@ export default function App() {
       {/* ── Fixed right time indicator ── */}
       <RightIndicator
         activeSection={activeSection}
-        textColor={INDICATOR_TEXT[activeSection] ?? "#7A6A55"}
+        textColor={INDICATOR_TEXT_COLORS[activeSection] ?? DEFAULT_INDICATOR_COLOR}
       />
 
       {/* ── Hero ── */}
       <Hero />
 
-      {/* ── Brunch section (morning) — image left ── */}
-      <DiningSection
-        id="brunch"
-        imagePosition="left"
-        image={IMG_BRUNCH}
-        imageAlt="Internity brunch"
-        category="brunch"
-        timeLabel="from 10:00"
-        headline="Start your day with something extraordinary."
-        description={
-          "Our morning kitchen celebrates the ritual of a slow, unhurried meal. " +
-          "Seasonal produce, handcrafted pastries, and specialty coffee — " +
-          "crafted with the same devotion as our evening tasting menu."
-        }
-        ctaText="view our brunch menu"
-        onCtaClick={() => setMenuOpen("brunch")}
-      />
-
-      {/* ── Divider ── */}
-      <SectionDivider color={bgColor} />
-
-      {/* ── Lunch section (afternoon) — image right ── */}
-      <DiningSection
-        id="lunch"
-        imagePosition="right"
-        image={IMG_LUNCH}
-        imageAlt="Internity lunch service"
-        category="lunch"
-        timeLabel="served all day"
-        headline="A table in the afternoon light."
-        description={
-          "Our à la carte lunch embraces the unhurried pleasure of midday dining. " +
-          "Seasonal plates, carefully sourced wines, and a terrace " +
-          "that catches the afternoon sun. Every bottle chosen for character and surprise."
-        }
-        ctaText="view our lunch menu"
-        onCtaClick={() => setMenuOpen("lunch")}
-      />
-
-      <SectionDivider color={bgColor} />
-
-      {/* ── Dinner section (evening) — image left ── */}
-      <DiningSection
-        id="dinner"
-        imagePosition="left"
-        image={IMG_DINNER}
-        imageAlt="Internity evening dinner"
-        category="dinner"
-        timeLabel="from 18:30"
-        headline="As evening settles in, the table finds its rhythm."
-        description={
-          "Our dinner menu is bold, refined, and deeply personal. " +
-          "Chef Delacroix leads the kitchen through a journey of textures and flavours " +
-          "— each dish composed with intention, each pairing chosen with care."
-        }
-        ctaText="view our dinner menu"
-        onCtaClick={() => setMenuOpen("dinner")}
-      />
+      {/* ── Dining sections (brunch / lunch / dinner) ── */}
+      {DINING_SECTIONS.map((section, idx) => (
+        <React.Fragment key={section.id}>
+          {idx > 0 && <SectionDivider color={bgColor} />}
+          <DiningSection
+            {...section}
+            onCtaClick={() => setMenuOpen(section.id as MenuType)}
+          />
+        </React.Fragment>
+      ))}
 
       {/* ── Reservation inline section ── */}
       <ReservationInlineSection
@@ -172,10 +124,18 @@ export default function App() {
       <ReservationModal
         open={reserveOpen}
         onClose={() => setReserveOpen(false)}
+        onReservationCreated={handleReservationCreated}
       />
       <MenuModal
         open={menuOpen}
         onClose={() => setMenuOpen(null)}
+      />
+      <PaymentModal
+        open={paymentOpen}
+        onClose={() => setPaymentOpen(false)}
+        reservationId={reservationId}
+        reservationData={reservationData}
+        onSuccess={handlePaymentSuccess}
       />
     </motion.div>
   );
@@ -209,7 +169,7 @@ function ReservationInlineSection({
         transition={{ duration: 0.6 }}
         className="text-[#7A6A55] text-[10px] tracking-[0.35em] uppercase mb-4"
       >
-        reservations
+        {RESERVATION_SECTION_COPY.label}
       </motion.p>
 
       <motion.h2
@@ -225,7 +185,7 @@ function ReservationInlineSection({
           fontStyle: "italic",
         }}
       >
-        join us for a meal worth remembering
+        {RESERVATION_SECTION_COPY.headline}
       </motion.h2>
 
       <motion.p
@@ -235,8 +195,7 @@ function ReservationInlineSection({
         transition={{ duration: 0.6, delay: 0.12 }}
         className="text-[#7A6A55] text-sm mb-10 max-w-sm leading-relaxed"
       >
-        Tuesday through Sunday, morning until late. Walk-ins
-        welcome, reservations recommended.
+        {RESERVATION_SECTION_COPY.body}
       </motion.p>
 
       <motion.button
@@ -249,7 +208,7 @@ function ReservationInlineSection({
                    uppercase border-b border-[#1E1918]/40 pb-1 hover:border-[#1E1918]
                    transition-all duration-300"
       >
-        book a table
+        {RESERVATION_SECTION_COPY.cta}
         <span className="transform group-hover:translate-x-1 transition-transform duration-300 text-base">
           →
         </span>

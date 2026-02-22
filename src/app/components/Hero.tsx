@@ -54,7 +54,7 @@ export function Hero() {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="relative z-10 text-center pt-6"
       >
-        <p className="text-[#7A6A55] text-[10px] tracking-[0.3em] uppercase">
+        <p className="text-black text-[10px] tracking-[0.3em] uppercase">
           local time at {RESTAURANT_NAME}: {time}
         </p>
       </motion.div>
@@ -104,7 +104,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.8 }}
-          className="mt-8 text-[#7A6A55] text-sm tracking-[0.25em] select-none"
+          className="mt-8 text-black text-sm tracking-[0.25em] select-none"
         >
           {HERO_TAGLINE}
         </motion.p>
@@ -118,7 +118,7 @@ export function Hero() {
         className="relative z-10 flex justify-center pb-8"
       >
         <div className="flex flex-col items-center gap-2">
-          <div className="w-px h-12 bg-[#7A6A55]/40 animate-pulse" />
+          <div className="w-px h-12 bg-black/40 animate-pulse" />
         </div>
       </motion.div>
     </section>

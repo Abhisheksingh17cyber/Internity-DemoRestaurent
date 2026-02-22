@@ -21,13 +21,13 @@ export const SECTION_BACKGROUNDS: Record<string, string> = {
 };
 
 export const INDICATOR_TEXT_COLORS: Record<string, string> = {
-  brunch: "#8B7055",
-  lunch:  "#7A6040",
-  dinner: "#8B5A45",
+  brunch: "#000000",
+  lunch:  "#000000",
+  dinner: "#000000",
 };
 
 export const DEFAULT_BG = "#F2EDE7";
-export const DEFAULT_INDICATOR_COLOR = "#7A6A55";
+export const DEFAULT_INDICATOR_COLOR = "#000000";
 
 // ── Navigation ───────────────────────────────────────────────────────────────
 export const NAV_LINKS: NavLink[] = [

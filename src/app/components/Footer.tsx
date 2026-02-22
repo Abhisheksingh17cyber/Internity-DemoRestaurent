@@ -41,7 +41,7 @@ export function Footer() {
             >
               {RESTAURANT_NAME}
             </p>
-            <p className="text-[#7A6A55] text-xs leading-relaxed mb-6 max-w-xs">
+            <p className="text-[#9A918A] text-xs leading-relaxed mb-6 max-w-xs">
               {FOOTER_TAGLINE}
             </p>
             {/* Social */}
@@ -57,7 +57,7 @@ export function Footer() {
                     rel="noopener noreferrer"
                     aria-label={link.label}
                     className="w-8 h-8 border border-white/10 hover:border-white/40 flex items-center
-                               justify-center text-[#7A6A55] hover:text-white transition-all duration-300"
+                               justify-center text-[#9A918A] hover:text-white transition-all duration-300"
                   >
                     <Icon size={13} />
                   </a>
@@ -77,8 +77,8 @@ export function Footer() {
             <div className="space-y-3">
               {HOURS.map((h) => (
                 <div key={h.days} className="flex justify-between gap-4 text-xs">
-                  <span className="text-[#7A6A55]">{h.days}</span>
-                  <span className={h.time === "Closed" ? "text-[#5A4A3A]" : "text-[#C5BEB5]"}>
+                  <span className="text-[#9A918A]">{h.days}</span>
+                  <span className={h.time === "Closed" ? "text-[#7A6A55]" : "text-[#C5BEB5]"}>
                     {h.time}
                   </span>
                 </div>
@@ -95,16 +95,16 @@ export function Footer() {
           >
             <p className="text-white/30 text-[10px] tracking-[0.3em] uppercase mb-5">Contact</p>
             <div className="space-y-3 text-xs">
-              <p className="text-[#7A6A55] leading-relaxed">
+              <p className="text-[#9A918A] leading-relaxed">
                 {CONTACT.address.line1}<br />
                 {CONTACT.address.city}, {CONTACT.address.country}
               </p>
               <a href={CONTACT.phoneHref}
-                 className="block text-[#C5BEB5] hover:text-white transition-colors">
+                className="block text-[#C5BEB5] hover:text-white transition-colors">
                 {CONTACT.phone}
               </a>
               <a href={CONTACT.emailHref}
-                 className="block text-[#C5BEB5] hover:text-white transition-colors">
+                className="block text-[#C5BEB5] hover:text-white transition-colors">
                 {CONTACT.email}
               </a>
             </div>
@@ -115,14 +115,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-6 border-t border-white/8 flex flex-col sm:flex-row
                         items-start sm:items-center justify-between gap-3">
-          <p className="text-[#3A3028] text-xs tracking-widest">
+          <p className="text-[#9A918A] text-xs tracking-widest">
             &copy; {new Date().getFullYear()} {RESTAURANT_NAME_FORMAL}
           </p>
           <div className="flex gap-5">
-            <a href="#" className="text-[#3A3028] hover:text-[#7A6A55] text-xs tracking-widest uppercase transition-colors">
+            <a href="#" className="text-[#9A918A] hover:text-white text-xs tracking-widest uppercase transition-colors">
               Privacy
             </a>
-            <a href="#" className="text-[#3A3028] hover:text-[#7A6A55] text-xs tracking-widest uppercase transition-colors">
+            <a href="#" className="text-[#9A918A] hover:text-white text-xs tracking-widest uppercase transition-colors">
               Terms
             </a>
           </div>

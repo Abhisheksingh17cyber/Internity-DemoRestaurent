@@ -145,7 +145,7 @@ export default function App() {
 function SectionDivider({ color: _color }: { color: string }) {
   return (
     <div className="flex justify-center py-4 opacity-30">
-      <div className="h-px w-12 bg-[#7A6A55]" />
+      <div className="h-px w-12 bg-black/30" />
     </div>
   );
 }
@@ -167,7 +167,7 @@ function ReservationInlineSection({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-[#7A6A55] text-[10px] tracking-[0.35em] uppercase mb-4"
+        className="text-black text-[10px] tracking-[0.35em] uppercase mb-4"
       >
         {RESERVATION_SECTION_COPY.label}
       </motion.p>
@@ -177,7 +177,7 @@ function ReservationInlineSection({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.06 }}
-        className="text-[#1E1918] mb-5 leading-tight max-w-lg"
+        className="text-black mb-5 leading-tight max-w-lg"
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
@@ -193,7 +193,7 @@ function ReservationInlineSection({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.12 }}
-        className="text-[#7A6A55] text-sm mb-10 max-w-sm leading-relaxed"
+        className="text-black text-sm mb-10 max-w-sm leading-relaxed"
       >
         {RESERVATION_SECTION_COPY.body}
       </motion.p>
@@ -204,8 +204,8 @@ function ReservationInlineSection({
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.18 }}
         onClick={onReserveClick}
-        className="group flex items-center gap-3 text-[#1E1918] text-xs tracking-[0.22em]
-                   uppercase border-b border-[#1E1918]/40 pb-1 hover:border-[#1E1918]
+        className="group flex items-center gap-3 text-black text-xs tracking-[0.22em]
+                   uppercase border-b border-black/40 pb-1 hover:border-black
                    transition-all duration-300"
       >
         {RESERVATION_SECTION_COPY.cta}
@@ -225,7 +225,7 @@ function ReservationInlineSection({
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="w-1 h-1 rounded-full bg-[#7A6A55]/40"
+            className="w-1 h-1 rounded-full bg-black/40"
           />
         ))}
       </motion.div>

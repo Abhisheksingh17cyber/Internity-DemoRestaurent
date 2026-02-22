@@ -22,8 +22,8 @@ const CARD_STYLE = {
     base: {
       fontFamily: "'Jost', sans-serif",
       fontSize: "14px",
-      color: "#1E1918",
-      "::placeholder": { color: "#7A6A55" },
+      color: "#000000",
+      "::placeholder": { color: "rgba(0,0,0,0.4)" },
     },
     invalid: { color: "#B44A3D" },
   },
@@ -121,17 +121,17 @@ function PaymentForm({
       {/* Close button */}
       <button
         onClick={onClose}
-        className="mb-8 text-[#7A6A55] hover:text-[#1E1918] transition-colors"
+        className="mb-8 text-black/60 hover:text-black transition-colors"
       >
         <X size={20} />
       </button>
 
       {/* Header */}
-      <p className="text-[#7A6A55] text-[10px] tracking-[0.35em] uppercase mb-3">
+      <p className="text-black text-[10px] tracking-[0.35em] uppercase mb-3">
         reservation deposit
       </p>
       <h2
-        className="text-[#1E1918] mb-4 leading-tight"
+        className="text-black mb-4 leading-tight"
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -143,28 +143,28 @@ function PaymentForm({
       </h2>
 
       {/* Reservation summary */}
-      <div className="border-t border-[#1E1918]/10 pt-5 mb-8 space-y-2 text-sm">
+      <div className="border-t border-black/10 pt-5 mb-8 space-y-2 text-sm">
         <div className="flex justify-between">
-          <span className="text-[#7A6A55]">Guest</span>
-          <span className="text-[#1E1918]">
+          <span className="text-black/60">Guest</span>
+          <span className="text-black">
             {reservationData.firstName} {reservationData.lastName}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#7A6A55]">Date</span>
-          <span className="text-[#1E1918]">{reservationData.date}</span>
+          <span className="text-black/60">Date</span>
+          <span className="text-black">{reservationData.date}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#7A6A55]">Time</span>
-          <span className="text-[#1E1918]">{reservationData.time}</span>
+          <span className="text-black/60">Time</span>
+          <span className="text-black">{reservationData.time}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#7A6A55]">Party size</span>
-          <span className="text-[#1E1918]">{reservationData.guests}</span>
+          <span className="text-black/60">Party size</span>
+          <span className="text-black">{reservationData.guests}</span>
         </div>
-        <div className="flex justify-between border-t border-[#1E1918]/10 pt-3 mt-3">
-          <span className="text-[#7A6A55]">Deposit</span>
-          <span className="text-[#1E1918] font-medium">
+        <div className="flex justify-between border-t border-black/10 pt-3 mt-3">
+          <span className="text-black/60">Deposit</span>
+          <span className="text-black font-medium">
             ${depositAmount} {currency}
           </span>
         </div>
@@ -177,9 +177,9 @@ function PaymentForm({
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col gap-4"
         >
-          <CheckCircle size={28} className="text-[#7A6A55]" />
+          <CheckCircle size={28} className="text-black" />
           <p
-            className="text-[#1E1918]"
+            className="text-black"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "1.5rem",
@@ -188,14 +188,14 @@ function PaymentForm({
           >
             Payment confirmed, {reservationData.firstName}.
           </p>
-          <p className="text-[#7A6A55] text-sm">
+          <p className="text-black text-sm">
             Your deposit of ${depositAmount} has been received. A confirmation
             has been sent to {reservationData.email}.
           </p>
           <button
             onClick={onSuccess}
-            className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#1E1918]/40
-                       text-[#1E1918] mt-4 hover:border-[#1E1918] transition-colors"
+            className="self-start text-xs tracking-[0.2em] uppercase border-b border-black/40
+                       text-black mt-4 hover:border-black transition-colors"
           >
             done
           </button>
@@ -206,15 +206,15 @@ function PaymentForm({
           <p className="text-red-600 text-sm">{fetchError}</p>
           <button
             onClick={onClose}
-            className="text-xs tracking-[0.2em] uppercase border-b border-[#1E1918]/40
-                       text-[#1E1918] hover:border-[#1E1918] transition-colors"
+            className="text-xs tracking-[0.2em] uppercase border-b border-black/40
+                       text-black hover:border-black transition-colors"
           >
             go back
           </button>
         </div>
       ) : !clientSecret ? (
         /* Loading state */
-        <div className="flex items-center gap-3 text-[#7A6A55] text-sm">
+        <div className="flex items-center gap-3 text-black text-sm">
           <Loader2 size={16} className="animate-spin" />
           Preparing payment...
         </div>
@@ -232,10 +232,10 @@ function PaymentForm({
           )}
 
           <div>
-            <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-3">
+            <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-3">
               Card details
             </label>
-            <div className="border-b border-[#1E1918]/25 focus-within:border-[#1E1918] pb-2.5 transition-colors duration-300">
+            <div className="border-b border-black/25 focus-within:border-black pb-2.5 transition-colors duration-300">
               <CardElement options={CARD_STYLE} />
             </div>
           </div>
@@ -243,8 +243,8 @@ function PaymentForm({
           <button
             type="submit"
             disabled={loading || !stripe}
-            className="group flex items-center gap-3 text-[#1E1918] text-xs tracking-[0.2em] uppercase
-                       mt-4 border-b border-[#1E1918]/40 pb-0.5 hover:border-[#1E1918] transition-all
+            className="group flex items-center gap-3 text-black text-xs tracking-[0.2em] uppercase
+                       mt-4 border-b border-black/40 pb-0.5 hover:border-black transition-all
                        duration-300 disabled:opacity-50"
           >
             {loading ? "processing..." : `pay $${depositAmount} deposit`}
@@ -255,7 +255,7 @@ function PaymentForm({
             )}
           </button>
 
-          <p className="text-[#7A6A55]/60 text-[10px] mt-4 leading-relaxed">
+          <p className="text-black/40 text-[10px] mt-4 leading-relaxed">
             Your deposit will be applied toward your final bill.
             Cancellations must be made 24 hours in advance for a full refund.
           </p>
@@ -287,7 +287,7 @@ export function PaymentModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#1E1918]/30 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
             onClick={onClose}
           />
           <motion.div

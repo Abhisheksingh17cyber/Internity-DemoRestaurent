@@ -37,7 +37,7 @@ export function Navbar({ onReserveClick }: NavbarProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           onClick={() => scrollTo("hero")}
-          className="font-['Cormorant_Garamond'] italic text-[1.4rem] tracking-wide text-[#1E1918]
+          className="font-['Cormorant_Garamond'] italic text-[1.4rem] tracking-wide text-black
                      select-none leading-none"
         >
           {RESTAURANT_NAME}
@@ -53,8 +53,8 @@ export function Navbar({ onReserveClick }: NavbarProps) {
           {/* Reserve link — visible on desktop */}
           <button
             onClick={onReserveClick}
-            className="hidden md:block text-[#1E1918] text-xs tracking-[0.18em] uppercase
-                       hover:text-[#7A6A55] transition-colors duration-300"
+            className="hidden md:block text-black text-xs tracking-[0.18em] uppercase
+                       hover:text-black/60 transition-colors duration-300"
           >
             book a table
           </button>
@@ -65,11 +65,11 @@ export function Navbar({ onReserveClick }: NavbarProps) {
             aria-label="Toggle menu"
             className="flex flex-col gap-[5px] group"
           >
-            <span className={`block h-px w-6 bg-[#1E1918] transition-all duration-300
+            <span className={`block h-px w-6 bg-black transition-all duration-300
                               ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block h-px bg-[#1E1918] transition-all duration-300
+            <span className={`block h-px bg-black transition-all duration-300
                               ${menuOpen ? "opacity-0 w-0" : "w-4"}`} />
-            <span className={`block h-px w-6 bg-[#1E1918] transition-all duration-300
+            <span className={`block h-px w-6 bg-black transition-all duration-300
                               ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
           </button>
         </motion.div>
@@ -94,8 +94,8 @@ export function Navbar({ onReserveClick }: NavbarProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.4 }}
                   onClick={() => scrollTo(item.id)}
-                  className="font-['Cormorant_Garamond'] italic text-5xl md:text-7xl text-[#1E1918]
-                             font-[200] text-left hover:text-[#7A6A55] transition-colors duration-300
+                  className="font-['Cormorant_Garamond'] italic text-5xl md:text-7xl text-black
+                             font-[200] text-left hover:text-black/60 transition-colors duration-300
                              leading-tight"
                 >
                   {item.label}
@@ -105,7 +105,7 @@ export function Navbar({ onReserveClick }: NavbarProps) {
 
             {/* Bottom contact in overlay */}
             <div className="absolute bottom-10 left-12 md:left-20">
-              <p className="text-[#7A6A55] text-xs tracking-[0.2em] uppercase">
+              <p className="text-black text-xs tracking-[0.2em] uppercase">
                 {CONTACT.phone} &nbsp;·&nbsp; {CONTACT.email}
               </p>
             </div>

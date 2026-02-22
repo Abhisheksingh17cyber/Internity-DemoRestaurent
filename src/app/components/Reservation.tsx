@@ -30,10 +30,10 @@ interface ReservationProps {
 }
 
 export function Reservation({ asModal, onClose, onReservationCreated }: ReservationProps) {
-  const [form, setForm]       = useState<ReservationFormData>(INITIAL);
-  const [submitted, setSubm]  = useState(false);
+  const [form, setForm] = useState<ReservationFormData>(INITIAL);
+  const [submitted, setSubm] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -76,8 +76,8 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
 
   // ── Shared input class ──
   const input =
-    "w-full bg-transparent border-b border-[#1E1918]/25 focus:border-[#1E1918] text-[#1E1918] " +
-    "placeholder-[#7A6A55]/50 py-2.5 text-sm outline-none transition-colors duration-300";
+    "w-full bg-transparent border-b border-black/25 focus:border-black text-black " +
+    "placeholder-black/40 py-2.5 text-sm outline-none transition-colors duration-300";
 
   const content = (
     <div
@@ -91,7 +91,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
         {asModal && (
           <button
             onClick={onClose}
-            className="mb-8 text-[#7A6A55] hover:text-[#1E1918] transition-colors"
+            className="mb-8 text-black/60 hover:text-black transition-colors"
           >
             <X size={20} />
           </button>
@@ -102,7 +102,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-[#7A6A55] text-[10px] tracking-[0.35em] uppercase mb-3"
+          className="text-black text-[10px] tracking-[0.35em] uppercase mb-3"
         >
           reservations
         </motion.p>
@@ -112,7 +112,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.06 }}
-          className="text-[#1E1918] mb-4 leading-tight"
+          className="text-black mb-4 leading-tight"
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2.4rem, 5vw, 4rem)",
@@ -128,10 +128,10 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.12 }}
-          className="text-[#7A6A55] text-sm leading-relaxed mb-12"
+          className="text-black text-sm leading-relaxed mb-12"
         >
           For parties of seven or more, please call us at{" "}
-          <a href={CONTACT.phoneHref} className="text-[#1E1918] border-b border-[#1E1918]/30">
+          <a href={CONTACT.phoneHref} className="text-black border-b border-black/30">
             {CONTACT.phone}
           </a>
           .
@@ -144,17 +144,17 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col gap-4"
           >
-            <CheckCircle size={28} className="text-[#7A6A55]" />
-            <p className="text-[#1E1918]" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontStyle: "italic" }}>
+            <CheckCircle size={28} className="text-black" />
+            <p className="text-black" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.5rem", fontStyle: "italic" }}>
               We look forward to welcoming you, {form.firstName}.
             </p>
-            <p className="text-[#7A6A55] text-sm">
+            <p className="text-black text-sm">
               A confirmation has been sent to {form.email}.
             </p>
             <button
               onClick={reset}
-              className="self-start text-xs tracking-[0.2em] uppercase border-b border-[#1E1918]/40
-                         text-[#1E1918] mt-4 hover:border-[#1E1918] transition-colors"
+              className="self-start text-xs tracking-[0.2em] uppercase border-b border-black/40
+                         text-black mt-4 hover:border-black transition-colors"
             >
               new reservation
             </button>
@@ -184,11 +184,11 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             {/* Name row */}
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">First name *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">First name *</label>
                 <input name="firstName" value={form.firstName} onChange={onChange} required placeholder="John" className={input} />
               </div>
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Last name *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Last name *</label>
                 <input name="lastName" value={form.lastName} onChange={onChange} required placeholder="Doe" className={input} />
               </div>
             </div>
@@ -196,11 +196,11 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             {/* Contact row */}
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Email *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Email *</label>
                 <input type="email" name="email" value={form.email} onChange={onChange} required placeholder="john@example.com" className={input} />
               </div>
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Phone</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Phone</label>
                 <input type="tel" name="phone" value={form.phone} onChange={onChange} placeholder="+1 (555) 000-0000" className={input} />
               </div>
             </div>
@@ -208,35 +208,35 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             {/* Date, Time, Guests */}
             <div className="grid grid-cols-3 gap-6">
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Date *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Date *</label>
                 <input type="date" name="date" value={form.date} onChange={onChange} required min={today}
                   className={`${input} [color-scheme:light]`} />
               </div>
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Time *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Time *</label>
                 <div className="relative">
                   <select name="time" value={form.time} onChange={onChange} required className={`${input} appearance-none pr-6`}>
                     <option value="" disabled>—</option>
                     {TIME_SLOTS.map((t) => <option key={t}>{t}</option>)}
                   </select>
-                  <ChevronDown size={12} className="absolute right-0 top-3 text-[#7A6A55] pointer-events-none" />
+                  <ChevronDown size={12} className="absolute right-0 top-3 text-black pointer-events-none" />
                 </div>
               </div>
               <div>
-                <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Guests *</label>
+                <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Guests *</label>
                 <div className="relative">
                   <select name="guests" value={form.guests} onChange={onChange} required className={`${input} appearance-none pr-6`}>
                     <option value="" disabled>—</option>
-                    {GUEST_OPTIONS.map((n) => <option key={n}>{n} {n==="1"?"guest":"guests"}</option>)}
+                    {GUEST_OPTIONS.map((n) => <option key={n}>{n} {n === "1" ? "guest" : "guests"}</option>)}
                   </select>
-                  <ChevronDown size={12} className="absolute right-0 top-3 text-[#7A6A55] pointer-events-none" />
+                  <ChevronDown size={12} className="absolute right-0 top-3 text-black pointer-events-none" />
                 </div>
               </div>
             </div>
 
             {/* Occasion */}
             <div>
-              <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Occasion</label>
+              <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Occasion</label>
               <div className="relative">
                 <select name="occasion" value={form.occasion} onChange={onChange} className={`${input} appearance-none pr-6`}>
                   <option value="">none</option>
@@ -244,13 +244,13 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
                     <option key={o}>{o}</option>
                   ))}
                 </select>
-                <ChevronDown size={12} className="absolute right-0 top-3 text-[#7A6A55] pointer-events-none" />
+                <ChevronDown size={12} className="absolute right-0 top-3 text-black pointer-events-none" />
               </div>
             </div>
 
             {/* Notes */}
             <div>
-              <label className="text-[#7A6A55] text-[10px] tracking-[0.25em] uppercase block mb-1">Requests & dietary needs</label>
+              <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Requests & dietary needs</label>
               <textarea
                 name="notes" value={form.notes} onChange={onChange} rows={2}
                 placeholder="Allergies, seating preferences..."
@@ -262,8 +262,8 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             <button
               type="submit"
               disabled={loading}
-              className="group flex items-center gap-3 text-[#1E1918] text-xs tracking-[0.2em] uppercase
-                         mt-4 border-b border-[#1E1918]/40 pb-0.5 hover:border-[#1E1918] transition-all
+              className="group flex items-center gap-3 text-black text-xs tracking-[0.2em] uppercase
+                         mt-4 border-b border-black/40 pb-0.5 hover:border-black transition-all
                          duration-300 disabled:opacity-50"
             >
               {loading ? "confirming..." : "confirm reservation"}
@@ -298,7 +298,7 @@ export function ReservationModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#1E1918]/30 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
             onClick={onClose}
           />
           <motion.div

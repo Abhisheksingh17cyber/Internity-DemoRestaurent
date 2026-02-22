@@ -11,7 +11,7 @@ interface RightIndicatorProps {
   textColor?: string; // adapts to background
 }
 
-export function RightIndicator({ activeSection, textColor = "#7A6A55" }: RightIndicatorProps) {
+export function RightIndicator({ activeSection, textColor = "#000000" }: RightIndicatorProps) {
   const isVisible = INDICATOR_SECTIONS.some((s) => s.id === activeSection);
 
   return (

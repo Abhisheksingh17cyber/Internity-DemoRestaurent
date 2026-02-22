@@ -77,7 +77,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#1E1918] leading-none mb-3"
+            className="text-black leading-none mb-3"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(3.5rem, 7vw, 6rem)",
@@ -94,7 +94,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#7A6A55] text-sm mb-5 tracking-wide"
+            className="text-black text-sm mb-5 tracking-wide"
           >
             {timeLabel}
           </motion.p>
@@ -105,7 +105,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.13, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#1E1918] text-base mb-4 leading-snug"
+            className="text-black text-base mb-4 leading-snug"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
           >
             {headline}
@@ -117,7 +117,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[#7A6A55] text-sm leading-relaxed mb-8"
+            className="text-black text-sm leading-relaxed mb-8"
           >
             {description}
           </motion.p>
@@ -129,8 +129,8 @@ export function DiningSection({
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             onClick={onCtaClick}
-            className="group flex items-center gap-2 text-[#1E1918] text-xs tracking-[0.2em]
-                       uppercase border-b border-[#1E1918]/40 pb-0.5 hover:border-[#1E1918]
+            className="group flex items-center gap-2 text-black text-xs tracking-[0.2em]
+                       uppercase border-b border-black/40 pb-0.5 hover:border-black
                        transition-all duration-300"
           >
             <span>{ctaText}</span>

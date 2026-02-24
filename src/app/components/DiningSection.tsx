@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
@@ -53,22 +54,25 @@ export function DiningSection({
       {/* ─── Image block (fills one side) ─── */}
       <div
         className={`relative w-full md:w-[52%] overflow-hidden
-                     ${isImageLeft ? "md:order-1" : "md:order-2"}
-                     h-[80vw] sm:h-[65vw] md:h-auto`}
+                    ${isImageLeft ? "md:order-1" : "md:order-2"}
+                    h-[80vw] sm:h-[65vw] md:h-auto`}
       >
-        <motion.img
-          src={image}
-          alt={imageAlt}
-          style={{ y: imageY }}
-          className="absolute inset-0 w-full h-[115%] object-cover -top-[7.5%]"
-        />
+        <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-[115%] -top-[7.5%]">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 52vw"
+          />
+        </motion.div>
       </div>
 
       {/* ─── Text block ─── */}
       <div
         className={`relative w-full md:w-[48%] flex items-center
-                     ${isImageLeft ? "md:order-2" : "md:order-1"}
-                     px-8 sm:px-12 md:px-16 lg:px-20 py-12 sm:py-16 md:py-0`}
+                    ${isImageLeft ? "md:order-2" : "md:order-1"}
+                    px-8 sm:px-12 md:px-16 lg:px-20 py-12 sm:py-16 md:py-0`}
       >
         <div className="max-w-sm mx-auto md:mx-0">
           {/* Category heading — very large, thin italic serif */}
@@ -77,12 +81,9 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-black leading-none mb-3 text-center md:text-left"
+            className="text-black leading-none mb-3 text-center md:text-left font-cormorant italic"
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(3rem, 12vw, 6rem)",
-              fontWeight: 300,
-              fontStyle: "italic",
             }}
           >
             {category}
@@ -94,7 +95,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-black text-[13px] sm:text-sm mb-5 tracking-wide text-center md:text-left"
+            className="text-black text-[13px] sm:text-sm mb-5 tracking-wide text-center md:text-left font-jost"
           >
             {timeLabel}
           </motion.p>
@@ -105,8 +106,8 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.13, ease: [0.22, 1, 0.36, 1] }}
-            className="text-black text-base mb-4 leading-snug text-center md:text-left mx-auto md:mx-0 max-w-[280px] sm:max-w-none"
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300 }}
+            className="text-black text-base mb-4 leading-snug text-center md:text-left mx-auto md:mx-0 max-w-[280px] sm:max-w-none font-cormorant"
+            style={{ fontWeight: 300 }}
           >
             {headline}
           </motion.p>
@@ -117,7 +118,7 @@ export function DiningSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="text-black text-sm leading-relaxed mb-8 text-center md:text-left opacity-80"
+            className="text-black text-sm leading-relaxed mb-8 text-center md:text-left opacity-80 font-jost"
           >
             {description}
           </motion.p>
@@ -131,8 +132,8 @@ export function DiningSection({
               transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
               onClick={onCtaClick}
               className="group flex items-center gap-2 text-black text-xs tracking-[0.2em]
-                          uppercase border-b border-black/40 pb-0.5 hover:border-black
-                          transition-all duration-300"
+                         uppercase border-b border-black/40 pb-0.5 hover:border-black
+                         transition-all duration-300"
             >
               <span>{ctaText}</span>
               <ArrowRight

@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F2EDE7;
+    --foreground: #000000;
+  }
+}
+
+*, *::before, *::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 300;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+}
+
+/* Override existing component styles to use CSS variables for fonts */
+.font-cormorant { font-family: var(--font-cormorant), serif; }
+.font-jost { font-family: var(--font-jost), sans-serif; }
+.font-caveat { font-family: var(--font-caveat), cursive; }

@@ -127,16 +127,13 @@ function PaymentForm({
       </button>
 
       {/* Header */}
-      <p className="text-black text-[10px] tracking-[0.35em] uppercase mb-3">
+      <p className="text-black text-[10px] tracking-[0.35em] uppercase mb-3 font-jost">
         reservation deposit
       </p>
       <h2
-        className="text-black mb-4 leading-tight"
+        className="text-black mb-4 leading-tight font-cormorant italic"
         style={{
-          fontFamily: "'Cormorant Garamond', serif",
           fontSize: "clamp(1.8rem, 8vw, 3rem)",
-          fontWeight: 300,
-          fontStyle: "italic",
         }}
       >
         secure your table

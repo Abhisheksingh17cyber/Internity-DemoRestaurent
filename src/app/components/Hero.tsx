@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { IMAGES, RESTAURANT_NAME, RESTAURANT_NAME_FORMAL, HERO_TAGLINE } from "../data";
@@ -19,7 +20,7 @@ function useClock() {
       });
     };
     setTime(fmt());
-    const id = setInterval(() => setTime(fmt()), 1000);
+    const id = setInterval(() => setTime(fmt()), 60000); // Update every minute is enough
     return () => clearInterval(id);
   }, []);
   return time;
@@ -36,12 +37,15 @@ export function Hero() {
     >
       {/* ── Blurred full-screen background ── */}
       <div className="absolute inset-0 overflow-hidden">
-        <img
+        <Image
           src={IMAGES.hero.background}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover scale-[1.15]"
+          fill
+          className="object-cover scale-[1.15]"
           style={{ filter: "blur(48px) saturate(0.75) brightness(1.1)" }}
+          sizes="100vw"
+          quality={60}
         />
         {/* Warm tint overlay */}
         <div className="absolute inset-0 bg-[#F2EDE7]/50" />
@@ -54,7 +58,7 @@ export function Hero() {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="relative z-10 text-center pt-6"
       >
-        <p className="text-black text-[10px] tracking-[0.3em] uppercase">
+        <p className="text-black text-[10px] tracking-[0.3em] uppercase font-jost">
           local time at {RESTAURANT_NAME}: {time}
         </p>
       </motion.div>
@@ -72,11 +76,14 @@ export function Hero() {
             aspectRatio: "auto"
           }}
         >
-          {/* Card image */}
-          <img
+          {/* Card image - THIS IS THE LCP ELEMENT */}
+          <Image
             src={IMAGES.hero.card}
             alt={RESTAURANT_NAME_FORMAL}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 88vw, 820px"
           />
           {/* Subtle dark overlay on card */}
           <div className="absolute inset-0 bg-[#1E1918]/25" />
@@ -89,9 +96,8 @@ export function Hero() {
             className="absolute inset-0 flex items-center justify-center"
           >
             <h1
-              className="text-white select-none text-center px-4"
+              className="text-white select-none text-center px-4 font-caveat"
               style={{
-                fontFamily: "'Caveat', cursive",
                 fontSize: "clamp(3.5rem, 15vw, 7rem)",
                 fontWeight: 400,
                 letterSpacing: "0.02em",
@@ -109,7 +115,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.8 }}
-          className="mt-8 text-black text-[11px] sm:text-sm tracking-[0.25em] select-none text-center px-4 leading-relaxed"
+          className="mt-8 text-black text-[11px] sm:text-sm tracking-[0.25em] select-none text-center px-4 leading-relaxed font-jost"
         >
           {HERO_TAGLINE}
         </motion.p>

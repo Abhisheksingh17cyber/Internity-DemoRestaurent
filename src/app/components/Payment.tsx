@@ -117,11 +117,11 @@ function PaymentForm({
   };
 
   return (
-    <div className="px-8 md:px-16 lg:px-24 py-20">
+    <div className="px-6 sm:px-12 md:px-16 lg:px-24 py-16 sm:py-20">
       {/* Close button */}
       <button
         onClick={onClose}
-        className="mb-8 text-black/60 hover:text-black transition-colors"
+        className="mb-8 p-2 -ml-2 text-black/60 hover:text-black transition-colors"
       >
         <X size={20} />
       </button>
@@ -134,7 +134,7 @@ function PaymentForm({
         className="text-black mb-4 leading-tight"
         style={{
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "clamp(2rem, 4vw, 3rem)",
+          fontSize: "clamp(1.8rem, 8vw, 3rem)",
           fontWeight: 300,
           fontStyle: "italic",
         }}
@@ -143,10 +143,10 @@ function PaymentForm({
       </h2>
 
       {/* Reservation summary */}
-      <div className="border-t border-black/10 pt-5 mb-8 space-y-2 text-sm">
-        <div className="flex justify-between">
-          <span className="text-black/60">Guest</span>
-          <span className="text-black">
+      <div className="border-t border-black/10 pt-5 mb-8 space-y-3 sm:space-y-2 text-sm">
+        <div className="flex justify-between gap-4">
+          <span className="text-black/60 flex-shrink-0">Guest</span>
+          <span className="text-black text-right truncate">
             {reservationData.firstName} {reservationData.lastName}
           </span>
         </div>

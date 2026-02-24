@@ -84,14 +84,14 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
       id="reservation"
       data-section="reservation"
       className={`${asModal ? "" : "min-h-screen flex flex-col justify-center"}
-                  px-8 md:px-16 lg:px-24 py-20`}
+                  px-6 sm:px-12 md:px-16 lg:px-24 py-16 sm:py-20`}
     >
       {/* ── Header ── */}
       <div className="max-w-lg">
         {asModal && (
           <button
             onClick={onClose}
-            className="mb-8 text-black/60 hover:text-black transition-colors"
+            className="mb-8 p-2 -ml-2 text-black/60 hover:text-black transition-colors"
           >
             <X size={20} />
           </button>
@@ -115,7 +115,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           className="text-black mb-4 leading-tight"
           style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(2.4rem, 5vw, 4rem)",
+            fontSize: "clamp(2.2rem, 8vw, 4rem)",
             fontWeight: 300,
             fontStyle: "italic",
           }}
@@ -128,7 +128,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.12 }}
-          className="text-black text-sm leading-relaxed mb-12"
+          className="text-black text-[13px] sm:text-sm leading-relaxed mb-10 sm:mb-12"
         >
           For parties of seven or more, please call us at{" "}
           <a href={CONTACT.phoneHref} className="text-black border-b border-black/30">
@@ -168,7 +168,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
             onSubmit={onSubmit}
-            className="space-y-6"
+            className="space-y-8 sm:space-y-6"
           >
             {/* Error display */}
             {error && (
@@ -182,7 +182,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             )}
 
             {/* Name row */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">First name *</label>
                 <input name="firstName" value={form.firstName} onChange={onChange} required placeholder="John" className={input} />
@@ -194,7 +194,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             </div>
 
             {/* Contact row */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Email *</label>
                 <input type="email" name="email" value={form.email} onChange={onChange} required placeholder="john@example.com" className={input} />
@@ -206,7 +206,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
             </div>
 
             {/* Date, Time, Guests */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div>
                 <label className="text-black text-[10px] tracking-[0.25em] uppercase block mb-1">Date *</label>
                 <input type="date" name="date" value={form.date} onChange={onChange} required min={today}

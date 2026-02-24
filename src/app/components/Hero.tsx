@@ -66,7 +66,11 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
           className="relative overflow-hidden rounded-2xl shadow-2xl"
-          style={{ width: "min(58vw, 820px)", height: "min(62vh, 520px)" }}
+          style={{
+            width: "min(88vw, 820px)",
+            height: "min(55vh, 520px)",
+            aspectRatio: "auto"
+          }}
         >
           {/* Card image */}
           <img
@@ -85,13 +89,14 @@ export function Hero() {
             className="absolute inset-0 flex items-center justify-center"
           >
             <h1
-              className="text-white select-none"
+              className="text-white select-none text-center px-4"
               style={{
                 fontFamily: "'Caveat', cursive",
-                fontSize: "clamp(3.5rem, 8vw, 7rem)",
+                fontSize: "clamp(3.5rem, 15vw, 7rem)",
                 fontWeight: 400,
                 letterSpacing: "0.02em",
                 textShadow: "0 2px 24px rgba(0,0,0,0.25)",
+                lineHeight: 1.1
               }}
             >
               {RESTAURANT_NAME}
@@ -104,7 +109,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.8 }}
-          className="mt-8 text-black text-sm tracking-[0.25em] select-none"
+          className="mt-8 text-black text-[11px] sm:text-sm tracking-[0.25em] select-none text-center px-4 leading-relaxed"
         >
           {HERO_TAGLINE}
         </motion.p>

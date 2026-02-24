@@ -94,19 +94,37 @@ export function Navbar({ onReserveClick }: NavbarProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.4 }}
                   onClick={() => scrollTo(item.id)}
-                  className="font-['Cormorant_Garamond'] italic text-5xl md:text-7xl text-black
+                  className="font-['Cormorant_Garamond'] italic text-4xl sm:text-5xl md:text-7xl text-black
                              font-[200] text-left hover:text-black/60 transition-colors duration-300
                              leading-tight"
                 >
                   {item.label}
                 </motion.button>
               ))}
+
+              {/* Mobile Reserve link */}
+              <motion.button
+                initial={{ opacity: 0, x: -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 * NAV_LINKS.length, duration: 0.4 }}
+                onClick={() => {
+                  setMenuOpen(false);
+                  onReserveClick();
+                }}
+                className="font-['Cormorant_Garamond'] italic text-4xl sm:text-5xl text-black/60
+                           font-[200] text-left hover:text-black transition-colors duration-300
+                           leading-tight md:hidden border-t border-black/10 pt-4 mt-2"
+              >
+                book a table
+              </motion.button>
             </nav>
 
             {/* Bottom contact in overlay */}
-            <div className="absolute bottom-10 left-12 md:left-20">
-              <p className="text-black text-xs tracking-[0.2em] uppercase">
-                {CONTACT.phone} &nbsp;·&nbsp; {CONTACT.email}
+            <div className="absolute bottom-10 left-12 md:left-20 pr-12">
+              <p className="text-black text-[10px] tracking-[0.2em] uppercase leading-relaxed">
+                {CONTACT.phone} <br className="sm:hidden" />
+                <span className="hidden sm:inline">&nbsp;·&nbsp;</span>
+                {CONTACT.email}
               </p>
             </div>
           </motion.div>

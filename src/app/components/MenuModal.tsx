@@ -43,49 +43,49 @@ export function MenuModal({ open, onClose }: MenuModalProps) {
               <div className="w-10 h-1 rounded-full bg-black/20" />
             </div>
 
-            <div className="px-8 md:px-16 py-6 pb-16">
+            <div className="px-6 sm:px-12 md:px-16 py-6 pb-16">
               {/* Header */}
-              <div className="flex items-start justify-between mb-8">
+              <div className="flex items-start justify-between mb-10">
                 <div>
                   <h2
                     className="text-black leading-tight"
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                      fontSize: "clamp(1.8rem, 8vw, 3.5rem)",
                       fontWeight: 300,
                       fontStyle: "italic",
                     }}
                   >
                     {data.title}
                   </h2>
-                  <p className="text-black text-xs tracking-[0.2em] uppercase mt-1">
+                  <p className="text-black text-[10px] tracking-[0.2em] uppercase mt-1 opacity-70">
                     {data.subtitle}
                   </p>
                 </div>
                 <button
                   onClick={onClose}
-                  className="mt-1 text-black/60 hover:text-black transition-colors"
+                  className="mt-1 p-2 -mr-2 text-black/60 hover:text-black transition-colors"
                 >
                   <X size={20} />
                 </button>
               </div>
 
               {/* Menu sections */}
-              <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
                 {data.sections.map((section) => (
                   <div key={section.heading}>
-                    <p className="text-black text-[10px] tracking-[0.3em] uppercase mb-4 pb-2
+                    <p className="text-black text-[10px] tracking-[0.3em] uppercase mb-5 pb-2
                                   border-b border-black/10">
                       {section.heading}
                     </p>
-                    <div className="space-y-4">
+                    <div className="space-y-6 md:space-y-4">
                       {section.items.map((item) => (
                         <div key={item.name} className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="text-black text-sm">{item.name}</p>
-                            <p className="text-black/60 text-xs mt-0.5">{item.note}</p>
+                          <div className="max-w-[75%] md:max-w-[80%]">
+                            <p className="text-black text-sm leading-snug">{item.name}</p>
+                            <p className="text-black/60 text-xs mt-1 leading-relaxed">{item.note}</p>
                           </div>
-                          <span className="text-black text-sm flex-shrink-0">{item.price}</span>
+                          <span className="text-black text-sm flex-shrink-0 font-light">{item.price}</span>
                         </div>
                       ))}
                     </div>

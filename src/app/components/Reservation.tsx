@@ -102,7 +102,7 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-black text-[10px] tracking-[0.35em] uppercase mb-3"
+          className="text-black text-[10px] tracking-[0.35em] uppercase mb-3 font-jost"
         >
           reservations
         </motion.p>
@@ -112,12 +112,9 @@ export function Reservation({ asModal, onClose, onReservationCreated }: Reservat
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.06 }}
-          className="text-black mb-4 leading-tight"
+          className="text-black mb-4 leading-tight font-cormorant italic"
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
             fontSize: "clamp(2.2rem, 8vw, 4rem)",
-            fontWeight: 300,
-            fontStyle: "italic",
           }}
         >
           book your table

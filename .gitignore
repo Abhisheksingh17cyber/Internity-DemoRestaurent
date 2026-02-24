@@ -5,5 +5,8 @@ dist
 .env.*.local
 .vercel
 .DS_Store
-nul
-tmpclaude-*
+.next/
+out/
+build/
+*.log
+next-env.d.ts

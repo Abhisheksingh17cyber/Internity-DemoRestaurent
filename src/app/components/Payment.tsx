@@ -13,7 +13,7 @@ import type { ReservationFormData, PaymentIntentResponse } from "../data";
 
 // ─── STRIPE SETUP ─────────────────────────────────────────────────────────────
 const stripePromise = loadStripe(
-  (import.meta as any).env.VITE_STRIPE_PUBLISHABLE_KEY ?? "",
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "",
 );
 
 // ─── CARD ELEMENT STYLING ─────────────────────────────────────────────────────

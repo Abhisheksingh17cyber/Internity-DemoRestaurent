@@ -4,8 +4,8 @@ A modern restaurant website built with React, TypeScript, Tailwind CSS, and Vite
 
 ## Tech Stack
 
-- **Frontend**: React 18, TypeScript, Tailwind CSS v4, Motion (Framer Motion)
-- **Backend**: Vercel Serverless Functions
+- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS v4, Motion (Framer Motion)
+- **Backend API**: Next.js API Routes (Serverless)
 - **Payments**: Stripe (PaymentIntent API + Elements)
 - **UI**: shadcn/ui (Radix-based), Lucide icons
 
@@ -28,7 +28,7 @@ cp .env.example .env
 
 ```bash
 npm run build
-npm run preview
+npm run start
 ```
 
 ## Deploy to Vercel
